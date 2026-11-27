@@ -1,16 +1,308 @@
-/* Здесь вы напишете основную часть стилей страницы.
-
-Будьте внимательны! Для корректной работы скриптов на этом сайте нужно, чтобы в HTML некоторые классы были названы особым образом:
-✦ like-icon — для svg-иконки анимированного сердца
-✦ card__like-button — для кнопки Like рядом с иконкой
-✦ card__icon-button — для кнопки, оборачивающей иконку
-✦ card__icon-button — для кнопки, оборачивающей иконку
-✦ is-liked — для обозначения состояния лайкнутой иконки в виде сердца
-✦ button__text — для обозначения текстового элемента внутри кнопки
-
-*/
-
 .page {
   min-inline-size: 320px;
   min-block-size: 100dvb;
+  padding-block: 100px;
+  color: var(--accent-color);
+  font-family: var(--main-font);
+  font-variation-settings: 'wght' var(--text-weight);
+  background-color: var(--background-color);
+  background-image: var(--page-background);
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.content-width {
+  inline-size: min(100%, var(--content-width));
+  margin-inline: auto;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-block-end: 100px;
+  border: 2px solid var(--accent-color);
+  padding-block: clamp(120px, 117.1831px + 0.7512vw, 128px);
+  font-family: var(--accent-font);
+  background-color: var(--background-color);
+}
+
+.header__logo {
+  font-size: clamp(49px, 43.3662px + 1.5023vw, 65px);
+  line-height: 1;
+  text-decoration: none;
+}
+
+.header__logo:hover {
+  opacity: 0.7;
+}
+
+.header__logo:focus {
+  outline: none;
+}
+
+.header__logo:focus-visible {
+  outline: 2px solid var(--accent-color);
+  outline-offset: 5px;
+}
+
+.header__title {
+  font-size: clamp(14px, 10.831px + 0.8451vw, 23px);
+  font-weight: 400;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.cards {
+  display: grid;
+  gap: 50px;
+}
+
+.card {
+  border: 2px solid var(--accent-color);
+  background-color: var(--background-color);
+}
+
+.card__title {
+  padding: 3px 10px;
+  font-size: 18px;
+  font-variation-settings: 'wght' var(--title-weight);
+  line-height: 1.22;
+}
+
+.card__picture {
+  position: relative;
+  border-block: 2px solid var(--accent-color);
+}
+
+.card__image {
+  display: block;
+  inline-size: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.card__label {
+  position: absolute;
+  inset-block-start: 25px;
+  inset-inline-end: 25px;
+  opacity: 0.5;
+  font-family: var(--accent-font);
+  font-size: 14px;
+  line-height: 1;
+  text-shadow: -1px 0 var(--label-stroke-color), 1px 0 var(--label-stroke-color), 0 -1px var(--label-stroke-color), 0 1px var(--label-stroke-color);
+  mix-blend-mode: hard-light;
+}
+
+@supports ((text-stroke: 1px #fff) or (-webkit-text-stroke: 1px #fff)) {
+  .card__label {
+    -webkit-text-stroke: 1px var(--label-stroke-color);
+    text-shadow: none;
+  }
+}
+
+.card__content {
+  display: grid;
+  gap: 25px;
+  padding: 25px;
+  font-size: 18px;
+  line-height: 1.17;
+}
+
+.card__actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 4px;
+}
+
+.button {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  border: 2px solid var(--accent-color);
+  padding: 15px 18px;
+  overflow: hidden;
+  font-family: var(--accent-font);
+  font-size: 14px;
+  line-height: 0.9;
+  background-color: var(--background-color);
+  transition: box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.button::before {
+  position: absolute;
+  inset: 0;
+  background-color: var(--accent-color);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease-in-out;
+  content: '';
+}
+
+.button:hover::before {
+  transform: translateX(0);
+}
+
+.button:focus {
+  outline: none;
+  box-shadow: 2px 2px 0 var(--accent-color);
+}
+
+.button:focus-visible {
+  outline: none;
+}
+
+.button__text,
+.button__icon {
+  position: relative;
+  color: var(--button-text-color);
+  mix-blend-mode: difference;
+}
+
+.card__like-button {
+  min-inline-size: 130px;
+  min-block-size: 38px;
+  padding: 9px 17px;
+}
+
+.card__icon-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid transparent;
+  padding: 0;
+  background-color: transparent;
+  transition: border-color 0.3s ease;
+  cursor: pointer;
+}
+
+.card__icon-button:focus {
+  outline: none;
+}
+
+.card__icon-button:focus-visible {
+  border-color: var(--accent-color);
+}
+
+.like-icon {
+  display: block;
+  inline-size: 39px;
+  block-size: 34px;
+  transform-origin: center;
+}
+
+.image-muted {
+  filter: grayscale(0.8);
+}
+
+.image-bright {
+  filter: saturate(2);
+}
+
+.image-warm {
+  filter: hue-rotate(25deg);
+}
+
+.image-calm {
+  filter: hue-rotate(150deg) opacity(0.7);
+}
+
+.image-vintage {
+  filter: sepia(0.8);
+}
+
+.image-blur {
+  filter: blur(5px);
+}
+
+.image-memory {
+  filter: invert(0.15) sepia(0.5) saturate(0.7);
+}
+
+.save-button {
+  margin-block-start: 50px;
+  margin-inline: auto;
+}
+
+.button__icon {
+  flex-shrink: 0;
+  inline-size: 21px;
+  block-size: 21px;
+  fill: currentColor;
+}
+
+.memory-dialog {
+  inline-size: 353px;
+  max-inline-size: calc(100% - 34px);
+  border: 2px solid var(--accent-color);
+  padding: 30px;
+  color: var(--accent-color);
+  font-family: var(--accent-font);
+  font-size: 14px;
+  line-height: 1.5;
+  background-color: var(--background-color);
+}
+
+.memory-dialog:not([open]) {
+  display: none;
+}
+
+.memory-dialog[open] {
+  display: grid;
+  grid-template-columns: 39px 1fr;
+  align-items: center;
+  gap: 30px 20px;
+}
+
+.memory-dialog::backdrop {
+  background-color: rgb(0 0 0 / 0.75);
+}
+
+.memory-dialog__icon {
+  inline-size: 39px;
+  block-size: 39px;
+  fill: currentColor;
+}
+
+.memory-dialog__text {
+  text-transform: uppercase;
+}
+
+.memory-dialog__form {
+  grid-column: 1 / -1;
+}
+
+.memory-dialog__button {
+  inline-size: 100%;
+  padding-block: 11px;
+  text-transform: uppercase;
+}
+
+@media (width <= 375px) {
+  .header__logo {
+    font-size: clamp(40px, 13.8182px + 8.1818vw, 49px);
+  }
+
+  .card__label {
+    inset-inline-end: 11px;
+  }
+
+  .save-button {
+    flex-direction: column;
+    gap: 8px;
+    padding-inline: 19px;
+  }
+
+  .save-button .button__icon {
+    inline-size: 28px;
+    block-size: 28px;
+  }
+
+  .memory-dialog {
+    padding-inline: 40px;
+  }
 }
