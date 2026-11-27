@@ -4,6 +4,8 @@
 
 [Опубликованная страница](https://globalarray.github.io/zakrivayuschiy-teg-ad/)
 
+https://github.com/globalarray/zakrivayuschiy-teg-ad
+
 ## Запуск
 
 Откройте `index.html` через локальный HTTP-сервер, например `python3 -m http.server 8000`.
